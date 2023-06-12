@@ -1,9 +1,16 @@
 DROP TABLE IF EXISTS user;
-DROP TABLE IF EXISTS post;
+DROP TABLE IF EXISTS leaderboard;
 
 CREATE TABLE user (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
-    score INTEGER
+    score INTEGER NOT NULL
 );
+
+CREATE TABLE leaderboard (
+    user_id INTEGER NOT NULL,
+    achieved TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    score INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user (id)
+)
